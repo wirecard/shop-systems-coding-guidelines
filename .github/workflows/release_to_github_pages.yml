@@ -1,6 +1,6 @@
 name: Release to github pages
 
-on: [push]
+on: [release]
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
