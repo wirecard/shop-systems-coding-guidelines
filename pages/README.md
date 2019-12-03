@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages this test abc
+## Welcome to GitHub Pages this test
 
 You can use the [editor on GitHub](https://github.com/tomazpu/shop-systems-coding-guidelines/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
