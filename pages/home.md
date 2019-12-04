@@ -1,15 +1,15 @@
-## Welcome to Wirecard shop systems coding guidelines
+# Welcome to Wirecard shop systems coding guidelines
 
 
-
-### Introduction
+## Introduction
 
 Although many developers still use PHP 5, most of the examples in this article only work with PHP 7+.
 
-1. #### Variables
+### Variables
 ___
-1.1 Use meaningful variable names
-Nice description of the rule.
+
+#### Use meaningful variable names
+A variable’s name should express the intention (cause of uses) of the variable.
 
 Bed:
 ```php
