@@ -39,3 +39,29 @@ Good:
 $this->getUser();
 ```
 ___
+
+#### Avoid else statements and to deep nesting of if else
+
+Bed:
+```php
+if (isset($password)) {
+    if ($password > 5) {
+        $sql->savePassword($password);
+    } else {
+        echo "Your password is to short";
+    }
+} else {
+    echo "You did not set a password";
+}
+```
+
+Good:
+```php
+try {
+    $this->validatePassword($password);
+    $this->savePasswordToDatabase($password);
+} catch (\Exception $error) {
+    echo $error->getMessage();
+}
+```
+___
