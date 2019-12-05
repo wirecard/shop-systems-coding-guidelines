@@ -6,6 +6,9 @@
 ## Table of Content
 
 1. [Introduction](#introduction)
+   * Code formatting
+      * 
+   * Shop system specific formatting
 2. [Variables](#variables)
    * [Variable names](#use-meaningful-variable-names)
    * [Method naming](#use-the-same-vocabulary-for-the-same-type-of-variable)
@@ -14,10 +17,27 @@
 5. Translations
 6. Classes
 7. Objects
+8. Architecture
+   * File naming
+   * Plugin structure
+   * Design patterns
+      * Service
+      * Factory
+      * Builder
+      * Strategy
+      * Helper
+9. Database
+10. Error handling
+11. Logging
 
 ## Introduction
 
 Although many developers still use PHP 5, most of the examples in this article only work with PHP 7+.
+
+### Code formatting
+___
+Here are general rules about how to formant your code. Every of these rules can be overruled by the shop system coding standard. So for specific shop systems there are specific rules.
+___
 
 ### Variables
 ___
@@ -37,7 +57,7 @@ $billingAddress = $this->getBillingAddress();
 ___
 
 #### Use the same vocabulary for the same type of variable
-Be consistent with the naming over the whole plugin. Don't name the same object different.
+Be consistent with the naming over the whole plugin. Don't name the same object differently.
 
 Bad:
 ```php
@@ -54,7 +74,7 @@ ___
 
 ### Comparison
 
-#### Avoid else statements and to deep nesting of if else
+#### Avoid else statements and too deep nesting of if else
 
 Bad:
 ```php
