@@ -7,13 +7,17 @@
 
 1. [Introduction](#introduction)
    * Code formatting
-      * 
    * Shop system specific formatting
 2. [Variables](#variables)
    * [Variable names](#use-meaningful-variable-names)
    * [Method naming](#use-the-same-vocabulary-for-the-same-type-of-variable)
-3. Functions
+   * [Use constants](#use-constants)
+   * [Use searchable names](#use-searchable-names)
+3. Methods
 4. [Comparison](#comparison)
+    * [Avoid one line if's](#avoid-one-line-ifs)
+    * [Avoid too deep nesting of if's](#avoid-else-statements-and-too-deep-nesting-of-if-else)
+    * [Avoid too many returns or if statements](#avoid-too-many-returns-or-if-statements)
 5. Translations
 6. Classes
 7. Objects
@@ -72,6 +76,36 @@ $this->getUser();
 ```
 ___
 
+#### Use constants
+
+Bad:
+```php
+$result = $this->serielize($data, 448);
+```
+
+Good:
+```php
+$result = $this->serielize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+```
+___
+
+#### Use searchable names 
+
+Bad:
+```php
+if ($order->getStatus() === 4) { //what the heck is 4?
+    //do somthing
+}
+```
+
+Good:
+```php
+if ($order->getStatus() === ORDER_STATUS_PROCESSING) {
+    //do somthing
+}
+```
+___
+
 ### Comparison
 
 #### Avoid else statements and too deep nesting of if else
@@ -96,6 +130,72 @@ try {
     $this->savePasswordToDatabase($password);
 } catch (\Exception $error) {
     echo $error->getMessage();
+}
+```
+___
+
+#### Avoid one-line if's
+They are messy and unclear to understand without deep knowledge of the code.
+
+Bad:
+```php
+$isThreeD = is_null($config->getMerchantAccountId()) || ($config->getThreeDMerchantAccountId() && ($transaction->isFallback() || $transaction->getThreeD())) ? true : false;
+```
+
+Good:
+```php
+function isThreeD() {
+    if ($config->isValid() && $transaction->isThreeD()) {
+        return true;
+    }
+
+    return false;
+}
+```
+___
+
+#### Avoid too many returns or if statements
+
+Bad:
+```php
+function getResponse() {
+    if ($this->validation()) {
+        return;
+    }
+    
+    if ($this->status == 'success') {
+        return new Success();
+    }
+
+    if ($this->status == 'failure') {
+        return new Failure();
+    }
+
+    if ($this->status == 'pending') {
+        return new Pending();
+    }
+
+    return Failure();
+}
+```
+
+Good:
+```php
+function getResponse() {
+    $this->validation();
+    switch($this->status) {
+        case 'success':
+            $response = new Pending();
+        case 'failure':
+            $response = new Failure();
+            break;
+        case 'pending':
+        default:
+            $response = new Pending();
+            break;
+    }
+
+    return $response;
 }
 ```
 ___
